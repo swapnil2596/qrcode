@@ -1,9 +1,9 @@
 pipeline {
     environment {
-    imagename = "iotbackend-uat"
-    registryCredential = 'sutradhar-dockerhub'
+    imagename = "Qr-Code_generator"
+    registryCredential = 'swapnil257-dockerhub'
     dockerImage = ''
-    jenkinsProject = 'iotbackend-uat'
+    jenkinsProject = 'Qr-Code_generator'
     yamlFIleName = 'iotbackend'
   }
 
@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage("Git Staging") {
         steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Admin-Gitlab', url: 'https://gitlab.sutradhar.tech/aditi.deshpande/iotbackend.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'ubuntu', url: 'https://github.com/swapnil2596/qrcode.git']]])
             }
     }
      // Create Iamge of the Project
@@ -37,11 +37,11 @@ pipeline {
             sh 'sudo su - jenkins -s/bin/bash'
             sh 'cd /var/lib/jenkins/workspace/$jenkinsProject/'
             sh 'docker image build -f Dockerfile -t $imagename:v1.$BUILD_ID .'
-            sh 'docker image tag $imagename:v1.$BUILD_ID sutradhar/$imagename:v1.$BUILD_ID'
-            sh 'docker image tag $imagename:v1.$BUILD_ID sutradhar/$imagename:latest'
-            sh 'sudo docker image push sutradhar/$imagename:v1.$BUILD_ID'
-            sh 'sudo docker image push sutradhar/$imagename:latest'
-            sh 'docker image rmi -f $imagename:v1.$BUILD_ID sutradhar/$imagename:v1.$BUILD_ID sutradhar/$imagename:latest'
+            sh 'docker image tag $imagename:v1.$BUILD_ID swapnil257/$imagename:v1.$BUILD_ID'
+            sh 'docker image tag $imagename:v1.$BUILD_ID swapnil257/$imagename:latest'
+            sh 'sudo docker image push swapnil257/$imagename:v1.$BUILD_ID'
+            sh 'sudo docker image push swapnil257/$imagename:latest'
+            sh 'docker image rmi -f $imagename:v1.$BUILD_ID swapnil257/$imagename:v1.$BUILD_ID sutradhar/$imagename:latest'
         }
     }
 
@@ -57,7 +57,7 @@ pipeline {
           label 'kubenode'
         }
         steps {
-            sh 'sudo docker pull sutradhar/$imagename:latest'
+            sh 'sudo docker pull swapnil257/$imagename:latest'
             // Check if the Deployment exists
          script {
                         def deploymentExists = sh(script: "kubectl get deployment ${jenkinsProject}-deployment", returnStatus: true) == 0
