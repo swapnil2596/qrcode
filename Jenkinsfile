@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage("Git Staging") {
         steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'ubuntu', url: 'https://github.com/swapnil2596/qrcode.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'ubuntu/****', url: 'https://github.com/swapnil2596/qrcode.git']]])
             }
     }
      // Create Iamge of the Project
