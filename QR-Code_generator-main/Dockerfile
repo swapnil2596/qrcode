@@ -8,7 +8,7 @@ RUN pip3 install -r requirement.txt
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "iotbackend.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "QR-Code_generator.wsgi:application"]
 
 # # "--settings=your_project_name.settings"
 
