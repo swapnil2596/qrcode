@@ -1,7 +1,7 @@
 pipeline {
     environment {
     imagename = "Qr-Code_generator"
-    registryCredential = 'swapnil-dockerhub'
+    registryCredential = 'swapnil257-dockerhub'
     dockerImage = ''
     jenkinsProject = 'Qr-Code_generator'
     yamlFIleName = 'iotbackend'
